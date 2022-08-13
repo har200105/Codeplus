@@ -19,7 +19,7 @@ export const fileUploadCss = {
   width: '110%',
   border: 'none',
   height: '100%',
-  color: '#ECC94B',
+  color: 'black',
   backgroundColor: 'white',
 };
 
@@ -114,7 +114,6 @@ const Register = () => {
               required
               id="chooseAvatar"
               type={'file'}
-              focusBorderColor="yellow.500"
               css={fileUploadStyle}
               onChange={changeImageHandler}
             />

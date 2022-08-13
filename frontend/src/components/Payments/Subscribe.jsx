@@ -10,11 +10,11 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { buySubscription } from '../../redux/actions/user';
-import { server } from '../../redux/store';
 import toast from 'react-hot-toast';
 import { API } from '../../api';
 
 const Subscribe = ({ user }) => {
+  const server = 'http://localhost:5000/api';
   const dispatch = useDispatch();
   const [key, setKey] = useState('');
 

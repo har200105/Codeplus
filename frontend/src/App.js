@@ -52,6 +52,7 @@ function App() {
     if (localStorage.getItem('token')) {
       dispatch(loadUser());
     }
+    localStorage.setItem('chakra-ui-color-mode', 'dark');
   }, [dispatch]);
 
   return (

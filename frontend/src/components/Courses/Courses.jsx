@@ -29,11 +29,6 @@ const Course = ({
   loading,
 }) => {
   const { user } = useSelector(state => state.user);
-  useEffect(() => {
-    console.log(
-      user.playlist.findIndex(item => item.course.toString() === id.toString())
-    );
-  }, []);
   return (
     <VStack className="course" alignItems={['center', 'flex-start']}>
       <Image src={imageSrc} boxSize="60" objectFit={'contain'} />
@@ -79,7 +74,7 @@ const Course = ({
           <Button colorScheme={'yellow'}>Watch Now</Button>
         </Link>
 
-        {user.playlist.findIndex(
+        {user?.playlist.findIndex(
           item => item.course.toString() === id.toString()
         ) === -1 && (
           <Button

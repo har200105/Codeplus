@@ -1,4 +1,3 @@
-import { server } from '../store';
 import { API } from '../../api';
 
 export const createCourse = formData => async dispatch => {
