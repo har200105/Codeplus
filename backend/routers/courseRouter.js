@@ -16,15 +16,12 @@ const singleUpload = require("../middleware/multerMiddleware");
 
 const router = express.Router();
 
-// Get All courses without lectures
 router.route("/courses").get(getAllCourses);
 
-// create new course - only admin
 router
   .route("/createcourse")
   .post(isAuthenticated, authorizeAdmin, singleUpload, createCourse);
 
-// Add lecture, Delete Course, Get Course Details
 router
   .route("/course/:id")
   .get(isAuthenticated, authorizeSubscribers, getCourseLectures)
