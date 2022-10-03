@@ -27,6 +27,21 @@ exports.getAllCourses = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+
+exports.getAdminCourses = catchAsyncErrors(async (req, res, next) => {
+
+  const courses = await Course.find({
+    createdBy: req.user._id
+  })
+    .populate("createdBy","name")
+    .select("-lectures");
+  res.status(200).json({
+    success: true,
+    courses,
+  });
+});
+
+
 exports.createCourse = catchAsyncErrors(async (req, res, next) => {
   console.log("req");
   console.log(req.user);

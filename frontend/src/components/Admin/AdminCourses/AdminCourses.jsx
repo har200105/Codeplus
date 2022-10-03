@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from '../Sidebar';
 import CourseModal from './CourseModal';
 import {
+  getAllAdminCourses,
   getAllCourses,
   getCourseLectures,
 } from '../../../redux/actions/course';
@@ -83,7 +84,7 @@ const AdminCourses = () => {
       dispatch({ type: 'clearMessage' });
     }
 
-    dispatch(getAllCourses());
+    dispatch(getAllAdminCourses());
   }, [dispatch, error, message, onClose]);
 
   return (
@@ -98,8 +99,6 @@ const AdminCourses = () => {
 
         <TableContainer w={['100vw', 'full']}>
           <Table variant={'simple'} size="lg">
-            <TableCaption>All available courses in the database</TableCaption>
-
             <Thead>
               <Tr>
                 <Th>Id</Th>
@@ -110,6 +109,7 @@ const AdminCourses = () => {
                 <Th isNumeric>Views</Th>
                 <Th isNumeric>Lectures</Th>
                 <Th isNumeric>Action</Th>
+                <Th isNumeric>Revenue</Th>
               </Tr>
             </Thead>
 
@@ -138,7 +138,6 @@ const AdminCourses = () => {
           loading={loading}
         />
       </Box>
-
       <Sidebar />
     </Grid>
   );
@@ -179,6 +178,7 @@ const Row = ({ item, coureDetailsHandler, deleteButtonHandler, loading }) => {
           </Button>
         </HStack>
       </Td>
+      <Td isNumeric>₹ {parseInt(item.views) * 0.001}</Td>
     </Tr>
   );
 };

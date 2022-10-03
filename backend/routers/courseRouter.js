@@ -6,6 +6,7 @@ const {
   deleteLecture,
   getAllCourses,
   getCourseLectures,
+  getAdminCourses,
 } = require("../controllers/courseController");
 const {
   authorizeAdmin,
@@ -17,6 +18,7 @@ const singleUpload = require("../middleware/multerMiddleware");
 const router = express.Router();
 
 router.route("/courses").get(getAllCourses);
+router.route("/getAdminCourses").get(isAuthenticated,authorizeAdmin,getAdminCourses);
 
 router
   .route("/createcourse")
