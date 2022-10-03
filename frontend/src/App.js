@@ -25,12 +25,9 @@ import toast, { Toaster } from 'react-hot-toast';
 import { loadUser } from './redux/actions/user';
 import { ProtectedRoute } from 'protected-route-react';
 import Loader from './components/Layout/Loader/Loader';
+import AddFaculty from './components/SuperAdmin/AddFaculty';
 
 function App() {
-  window.addEventListener('contextmenu', e => {
-    e.preventDefault();
-  });
-
   const { isAuthenticated, user, message, error, loading } = useSelector(
     state => state.user
   );
@@ -82,6 +79,17 @@ function App() {
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
                   <Profile user={user} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/add-faculty"
+              element={
+                <ProtectedRoute
+                  isAuthenticated={isAuthenticated}
+                  isAdmin={user && user.role === 'admin'}
+                >
+                  <AddFaculty />
                 </ProtectedRoute>
               }
             />
@@ -170,7 +178,7 @@ function App() {
                 <ProtectedRoute
                   adminRoute={true}
                   isAuthenticated={isAuthenticated}
-                  isAdmin={user && user.role === 'admin'}
+                  isAdmin={user && user.role === 'faculty'}
                 >
                   <Dashboard />
                 </ProtectedRoute>
@@ -182,7 +190,7 @@ function App() {
                 <ProtectedRoute
                   adminRoute={true}
                   isAuthenticated={isAuthenticated}
-                  isAdmin={user && user.role === 'admin'}
+                  isAdmin={user && user.role === 'faculty'}
                 >
                   <CreateCourse />
                 </ProtectedRoute>
@@ -194,7 +202,7 @@ function App() {
                 <ProtectedRoute
                   adminRoute={true}
                   isAuthenticated={isAuthenticated}
-                  isAdmin={user && user.role === 'admin'}
+                  isAdmin={user && user.role === 'faculty'}
                 >
                   <AdminCourses />
                 </ProtectedRoute>

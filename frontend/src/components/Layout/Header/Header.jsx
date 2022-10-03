@@ -10,7 +10,6 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React from 'react';
-import { ColorModeSwitcher } from '../../../ColorModeSwitcher';
 import { RiDashboardFill, RiLogoutBoxLine, RiMenu5Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -34,8 +33,6 @@ const Header = ({ isAuthenticated = false, user }) => {
 
   return (
     <>
-      {/* <ColorModeSwitcher /> */}
-
       <Button
         onClick={onOpen}
         colorScheme={'yellow'}
@@ -53,7 +50,15 @@ const Header = ({ isAuthenticated = false, user }) => {
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth={'1px'}>Codeplus</DrawerHeader>
+          <DrawerHeader borderBottomWidth={'1px'}>
+            <h1
+              style={{
+                fontWeight: 'bold',
+              }}
+            >
+              CODEPLUS
+            </h1>
+          </DrawerHeader>
 
           <DrawerBody>
             <VStack spacing={'4'} alignItems="flex-start">
@@ -90,11 +95,28 @@ const Header = ({ isAuthenticated = false, user }) => {
                         </Button>
                       </HStack>
 
-                      {user && user.role === 'admin' && (
+                      {user && user.role === 'faculty' && (
                         <Link onClick={onClose} to="/admin/dashboard">
                           <Button colorScheme={'purple'} variant="ghost">
                             <RiDashboardFill style={{ margin: '4px' }} />
                             Dashboard
+                          </Button>
+                        </Link>
+                      )}
+
+                      {user && user.role === 'admin' && (
+                        <Link onClick={onClose} to="/add-faculty">
+                          <Button colorScheme={'purple'} variant="ghost">
+                            <RiDashboardFill style={{ margin: '4px' }} />
+                            Add Faculty
+                          </Button>
+                        </Link>
+                      )}
+                      {user && user.role === 'admin' && (
+                        <Link onClick={onClose} to="/admin/users">
+                          <Button colorScheme={'purple'} variant="ghost">
+                            <RiDashboardFill style={{ margin: '4px' }} />
+                            Users
                           </Button>
                         </Link>
                       )}

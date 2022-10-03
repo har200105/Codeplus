@@ -13,7 +13,7 @@ const instance = new RazorPay({
 exports.buySubscription = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.user._id);
 
-  if (user.role === "admin")
+  if (user.role === "faculty")
     return next(new ErrorHandler("Admin can't buy subscription", 400));
 
   const plan_id = process.env.PLAN_ID || "plan_K4ooW4p1aS2zOl";

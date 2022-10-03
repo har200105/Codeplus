@@ -51,8 +51,8 @@ const courseSchema = mongoose.Schema({
         required:true
     },
     createdBy: {
-        type: String,
-        required:[true,"Course Creator Name is Required"]
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Users",
     },
     createdAt: {
         type: Date,

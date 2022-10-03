@@ -104,8 +104,12 @@ const Courses = () => {
   const categories = [
     'Web development',
     'Artificial Intellegence',
-    'Data Structure & Algorithm',
+    'Data Structure & Algorithms',
     'App Development',
+    'Machine Learning',
+    'Object Oriented Programming',
+    'Core CS',
+    'Databases',
   ];
 
   const { loading, courses, error, message } = useSelector(
@@ -143,8 +147,20 @@ const Courses = () => {
         paddingY="8"
         css={{
           '&::-webkit-scrollbar': {
-            display: 'none',
+            width: '0.4em',
           },
+          '&::-webkit-scrollbar-track': {
+            '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'teal',
+            outline: '1px solid teal',
+          },
+          // '&::-webkit-scrollbar': {
+          //   // display: 'none',
+          //   borderRadius: '10px',
+          //   // width: '10px',
+          // },
         }}
       >
         {categories.map((item, index) => (
@@ -169,7 +185,7 @@ const Courses = () => {
               views={item.views}
               imageSrc={item.poster.url}
               id={item._id}
-              creator={item.createdBy}
+              creator={item.createdBy.name}
               lectureCount={item.numOfVideos}
               addToPlaylistHandler={addToPlaylistHandler}
               loading={loading}

@@ -21,6 +21,17 @@ export const userReducer = createReducer(
     registerRequest: state => {
       state.loading = true;
     },
+    addFacultyRequest: state => {
+      state.loading = true;
+    },
+    addFacultySuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    addFacultyFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     registerSuccess: (state, action) => {
       state.loading = false;
       state.isAuthenticated = true;

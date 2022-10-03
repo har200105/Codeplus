@@ -18,7 +18,7 @@ const CoursePage = ({ user }) => {
   }, [dispatch, params.id]);
 
   if (
-    user.role !== 'admin' &&
+    !(user.role === 'faculty' || user.role === 'admin') &&
     (user.subscription === undefined || user.subscription.status !== 'active')
   ) {
     return <Navigate to={'/subscribe'} />;
@@ -72,7 +72,15 @@ const CoursePage = ({ user }) => {
           </VStack>
         </>
       ) : (
-        <Heading children="No Lectures" />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Heading children="No Lectures" />
+        </div>
       )}
     </Grid>
   );

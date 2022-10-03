@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
-import Sidebar from '../Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteUser,
@@ -51,7 +50,7 @@ const Users = () => {
   }, [dispatch, error, message]);
 
   return (
-    <Grid minH={'100vh'} templateColumns={['1fr', '5fr 1fr']}>
+    <Grid minH={'100vh'} templateColumns={['1fr', '5fr']}>
       <Box p={['0', '16']} overflowX="auto">
         <Heading
           textTransform={'uppercase'}
@@ -90,8 +89,6 @@ const Users = () => {
           </Table>
         </TableContainer>
       </Box>
-
-      <Sidebar />
     </Grid>
   );
 };

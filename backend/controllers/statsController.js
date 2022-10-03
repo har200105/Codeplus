@@ -5,8 +5,9 @@ const {sendEmail} = require("../middleware/mailMiddleware");
 
 exports.courseRequest = catchAsyncErrors(async (req, res, next) => {
   const { name, email, course } = req.body;
-  if (!name || !email || !course)
+  if (!name || !email || !course) {
     return next(new ErrorHandler("All fields are mandatory", 400));
+  }
 
   const to = process.env.MY_MAIL;
   const subject = "Requesting for a course on Codeplus";

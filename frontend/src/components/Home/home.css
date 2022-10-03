@@ -1,7 +1,12 @@
+*{
+    color: white;
+}
+
 .container {
   height: 100vh;
   padding: 5rem;
   box-sizing: border-box;
+
 }
 
 

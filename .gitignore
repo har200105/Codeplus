@@ -24,3 +24,8 @@ yarn-error.log*
 
 node_modules
 .env
+
+
+build
+firebase.json
+.firebaserc

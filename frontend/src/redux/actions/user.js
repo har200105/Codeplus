@@ -14,8 +14,6 @@ export const login = (email, password) => async dispatch => {
       }
     );
 
-    console.log(data.token);
-
     localStorage.setItem('token', data.token);
     dispatch({ type: 'loginSuccess', payload: data });
   } catch (error) {
@@ -37,6 +35,25 @@ export const register = formdata => async dispatch => {
     localStorage.setItem('token', data.token);
   } catch (error) {
     dispatch({ type: 'registerFail', payload: error.response.data.message });
+  }
+};
+
+export const addFaculty = formdata => async dispatch => {
+  try {
+    dispatch({ type: 'addFacultyRequest' });
+
+    const { data } = await API.post(`/addFaculty`, formdata, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
+    });
+
+    dispatch({ type: 'addFacultySuccess', payload: data });
+  } catch (error) {
+    dispatch({
+      type: 'addFacultyFail',
+      payload: error.response.data.message,
+    });
   }
 };
 

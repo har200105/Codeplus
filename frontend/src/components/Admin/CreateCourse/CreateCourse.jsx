@@ -20,7 +20,6 @@ import toast from 'react-hot-toast';
 const CreateCourse = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [createdBy, setCreatedBy] = useState('');
   const [category, setCategory] = useState('');
   const [image, setImage] = useState('');
   const [imagePrev, setImagePrev] = useState('');
@@ -31,8 +30,12 @@ const CreateCourse = () => {
   const categories = [
     'Web development',
     'Artificial Intellegence',
-    'Data Structure & Algorithm',
+    'Data Structure & Algorithms',
     'App Development',
+    'Machine Learning',
+    'Object Oriented Programming',
+    'Core CS',
+    'Databases',
   ];
 
   const changeImageHandler = e => {
@@ -53,7 +56,6 @@ const CreateCourse = () => {
     myForm.append('title', title);
     myForm.append('description', description);
     myForm.append('category', category);
-    myForm.append('createdBy', createdBy);
     myForm.append('file', image);
     dispatch(createCourse(myForm));
   };
@@ -93,13 +95,6 @@ const CreateCourse = () => {
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="Description"
-              type={'text'}
-              focusBorderColor="purple.300"
-            />
-            <Input
-              value={createdBy}
-              onChange={e => setCreatedBy(e.target.value)}
-              placeholder="Creator Name"
               type={'text'}
               focusBorderColor="purple.300"
             />

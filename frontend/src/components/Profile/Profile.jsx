@@ -111,7 +111,7 @@ const Profile = ({ user }) => {
             <Text children="CreatedAt" fontWeight={'bold'} />
             <Text children={user.createdAt.split('T')[0]} />
           </HStack>
-          {user.role !== 'admin' && (
+          {!(user.role === 'faculty' || user.role === 'admin') && (
             <HStack>
               <Text children="Subscription" fontWeight={'bold'} />
               {user.subscription && user.subscription.status === 'active' ? (

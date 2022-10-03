@@ -45,12 +45,14 @@ nodeCron.schedule("0 0 0 1 * *", async () => {
 const courseRoutes = require("./routers/courseRouter");
 const userRoutes = require("./routers/userRouter");
 const paymentRoutes = require("./routers/paymentRouter");
+const superAdminRoutes = require("./routers/superAdminRouter");
 const statsRoutes = require("./routers/statsRouter");
 
 app.use("/api", courseRoutes);
 app.use("/api", userRoutes);
 app.use("/api", paymentRoutes);
-app.use("/api",statsRoutes);
+app.use("/api", statsRoutes);
+app.use("/api",superAdminRoutes);
 
 
 app.use(ErrorMiddleware);

@@ -30,12 +30,6 @@ const Sidebar = () => {
         url={'courses'}
         active={location.pathname === '/admin/courses'}
       />
-      <LinkButton
-        Icon={RiUser3Fill}
-        text="Users"
-        url={'users'}
-        active={location.pathname === '/admin/users'}
-      />
     </VStack>
   );
 };

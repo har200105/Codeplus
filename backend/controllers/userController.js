@@ -34,7 +34,6 @@ const sendToken = (res, user, message, statusCode = 200) => {
 
 
 exports.register = catchAsyncErrors(async (req, res, next) => {
-  console.log("Registering");
   const { name, email, password } = req.body;
   const file = req.file;
 
@@ -43,11 +42,12 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
 
   let user = await User.findOne({ email });
 
-  if (user) return next(new ErrorHandler("User Already Exist", 409));
+  if (user) {
+     return next(new ErrorHandler("User Already Exist", 409));
+  }
 
   const fileUri = getDataUri(file);
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
-  console.log(mycloud)
 
   user = await User.create({
     name,
@@ -285,10 +285,17 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
-  if (!user) return next(new ErrorHandler("User not found", 404));
+  if (!user) {
+     return next(new ErrorHandler("User not found", 404));
+  }
 
-  if (user.role === "user") user.role = "admin";
-  else user.role = "user";
+  if (user.role === "user") {
+     user.role = "faculty";
+  }
+
+  else if (user.role === "faculty") {
+    user.role = "user";
+  }
 
   await user.save();
 

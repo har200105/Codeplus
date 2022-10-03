@@ -18,7 +18,9 @@ exports.getAllCourses = catchAsyncErrors(async (req, res, next) => {
       $regex: category,
       $options: "i",
     },
-  }).select("-lectures");
+  })
+    .populate("createdBy","name")
+    .select("-lectures");
   res.status(200).json({
     success: true,
     courses,
@@ -26,10 +28,13 @@ exports.getAllCourses = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.createCourse = catchAsyncErrors(async (req, res, next) => {
-  const { title, description, category, createdBy } = req.body;
+  console.log("req");
+  console.log(req.user);
+  const { title, description, category } = req.body;
 
-  if (!title || !description || !category || !createdBy)
+  if (!title || !description || !category) {
     return next(new ErrorHandler("Please add all fields", 400));
+  }
 
   const file = req.file;
 
@@ -41,7 +46,7 @@ exports.createCourse = catchAsyncErrors(async (req, res, next) => {
     title,
     description,
     category,
-    createdBy,
+    createdBy:req.user._id,
     poster: {
       public_id: mycloud.public_id,
       url: mycloud.secure_url,
@@ -69,14 +74,15 @@ exports.getCourseLectures = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Max video size 100mb
 exports.addLecture = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   const { title, description } = req.body;
 
   const course = await Course.findById(id);
 
-  if (!course) return next(new ErrorHandler("Course not found", 404));
+  if (!course) {
+     return next(new ErrorHandler("Course not found", 404));
+  }
 
   const file = req.file;
   const fileUri = getDataUri(file);
