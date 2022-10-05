@@ -50,7 +50,6 @@ const Register = () => {
   const submitHandler = e => {
     e.preventDefault();
     const myForm = new FormData();
-
     myForm.append('name', name);
     myForm.append('email', email);
     myForm.append('password', password);
@@ -63,7 +62,6 @@ const Register = () => {
     <Container h={'95vh'}>
       <VStack h={'full'} justifyContent="center" spacing={'16'}>
         <Heading textTransform={'uppercase'} children={'Registration'} />
-
         <form onSubmit={submitHandler} style={{ width: '100%' }}>
           <Box my="4" display={'flex'} justifyContent="center">
             <Avatar src={imagePrev} size={'2xl'} />
@@ -124,11 +122,11 @@ const Register = () => {
           </Button>
 
           <Box my="4">
-            Already Signed Up?{' '}
+            Already Signed Up?
             <Link to="/login">
               <Button colorScheme={'yellow'} variant="link">
                 Login
-              </Button>{' '}
+              </Button>
               here
             </Link>
           </Box>

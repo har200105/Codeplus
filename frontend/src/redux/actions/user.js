@@ -32,9 +32,28 @@ export const register = formdata => async dispatch => {
     });
 
     dispatch({ type: 'registerSuccess', payload: data });
-    localStorage.setItem('token', data.token);
   } catch (error) {
     dispatch({ type: 'registerFail', payload: error.response.data.message });
+  }
+};
+
+export const verifyEmail = token => async dispatch => {
+  try {
+    dispatch({ type: 'verifyEmailRequest' });
+
+    const { data } = await API.post(
+      `/verifyEmail`,
+      { token },
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    );
+
+    dispatch({ type: 'verifyEmailSuccess', payload: data });
+  } catch (error) {
+    dispatch({ type: 'verifyEmailFail', payload: error.response.data.message });
   }
 };
 
@@ -60,10 +79,8 @@ export const addFaculty = formdata => async dispatch => {
 export const loadUser = () => async dispatch => {
   try {
     dispatch({ type: 'loadUserRequest' });
-
     const { data } = await API.get(`/me`, {});
     dispatch({ type: 'loadUserSuccess', payload: data.user });
-    console.log(data);
   } catch (error) {
     dispatch({ type: 'loadUserFail', payload: error.response.data.message });
   }

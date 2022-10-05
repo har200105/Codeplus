@@ -26,6 +26,7 @@ import { loadUser } from './redux/actions/user';
 import { ProtectedRoute } from 'protected-route-react';
 import Loader from './components/Layout/Loader/Loader';
 import AddFaculty from './components/SuperAdmin/AddFaculty';
+import VerifyEmail from './components/Auth/VerifyEmail';
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -170,8 +171,7 @@ function App() {
             <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
             <Route path="/paymentfail" element={<PaymentFail />} />
-
-            {/* Admin Routes */}
+            <Route path="/verify/email/:token" element={<VerifyEmail />} />
             <Route
               path="/admin/dashboard"
               element={

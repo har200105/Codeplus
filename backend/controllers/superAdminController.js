@@ -27,7 +27,8 @@ exports.addFacultyController = catchAsyncErrors(async (req, res, next) => {
     name,
     email,
     password,
-    role:"faculty",
+    role: "faculty",
+    verified:true,
     avatar: {
       public_id: mycloud.public_id,
       url: mycloud.secure_url,

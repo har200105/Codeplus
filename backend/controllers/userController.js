@@ -31,38 +31,59 @@ const sendToken = (res, user, message, statusCode = 200) => {
   }
 };
 
-
-
 exports.register = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
   const file = req.file;
 
-  if (!name || !email || !password || !file)
-    return next(new ErrorHandler("Please enter all fields", 400));
+  if (!name || !email || !password || !file) {
+     return next(new ErrorHandler(`Please enter all fields`, 400));
+  }
 
   let user = await User.findOne({ email });
 
   if (user) {
-     return next(new ErrorHandler("User Already Exist", 409));
+     return next(new ErrorHandler(`User Already Exist`, 409));
   }
 
   const fileUri = getDataUri(file);
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
+  const emailToken = crypto.randomBytes(20).toString("hex");
+  const emailVerificationUrl = `${process.env.FRONTEND_URL}/verify/email/${emailToken}`;
+  const message = `Please Verify your email by clicking at this link :- \n\n ${emailVerificationUrl} \n\n.`;
+  await sendEmail(email, "Codeplus Email Verification", message);
+
   user = await User.create({
     name,
     email,
     password,
+    emailVerificationToken:emailToken,
     avatar: {
       public_id: mycloud.public_id,
       url: mycloud.secure_url,
     },
   });
 
-  console.log(user);
-
-  return sendToken(res, user, "Registered Successfully", 201);
+  return res.status(201).json({
+      success: true,
+      message:"Please verify your email by checking your mail box."
+  });
 });
+
+
+exports.verifyEmail = catchAsyncErrors(async (req, res, next) => {
+  console.log(req.body.token);
+  const user = await User.findOne({ emailVerificationToken: req.body.token });
+  if (user) {
+    user.verified = true;
+    user.emailVerificationToken = undefined;
+    await user.save({ validateBeforeSave: true });
+    res.status(200).json({ success: true,message:"Email Verified Sucessfully" });
+  } else {
+     return next(new ErrorHandler("Not a valid Email Verification url", 404));
+  }
+});
+
 
 exports.login = catchAsyncErrors(async (req, res, next) => {
   
@@ -73,7 +94,6 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   }
 
   const user = await User.findOne({ email }).select("+password");
-  console.log(user);
 
   if (!user) {
     return next(new ErrorHandler("Incorrect Email or Password", 401));
@@ -85,7 +105,12 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
       return next(new ErrorHandler("Incorrect Email or Password", 401));
   }
 
+  if (!user.verified) {
+    return next(new ErrorHandler("Email not verified yet", 401));
+  }
+
   sendToken(res, user, `Welcome back, ${user.name}`, 200);
+
 });
 
 exports.logout = catchAsyncErrors(async (req, res, next) => {
@@ -189,7 +214,6 @@ exports.forgetPassword = catchAsyncErrors(async (req, res, next) => {
 
   const message = `Click on the link to reset your password. ${url}. If you have not request then please ignore.`;
 
-  // Send token via email
   await sendEmail(user.email, "Codeplus Reset Password", message);
 
   res.status(200).json({
@@ -271,7 +295,6 @@ exports.removeFromPlaylist = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Admin Controllers
 
 exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
   const users = await User.find({});
@@ -308,11 +331,11 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
-  if (!user) return next(new ErrorHandler("User not found", 404));
+  if (!user) {
+    return next(new ErrorHandler("User not found", 404));
+  }
 
   await cloudinary.v2.uploader.destroy(user.avatar.public_id);
-
-  // Cancel Subscription
 
   await user.remove();
 
@@ -326,8 +349,6 @@ exports.deleteMyProfile = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.user._id);
 
   await cloudinary.v2.uploader.destroy(user.avatar.public_id);
-
-  // Cancel Subscription
 
   await user.remove();
 

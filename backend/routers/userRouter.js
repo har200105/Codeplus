@@ -15,6 +15,7 @@ const {
   updateProfile,
   updateprofilepicture,
   updateUserRole,
+  verifyEmail,
 } = require( "../controllers/userController");
 const { authorizeAdmin, isAuthenticated } = require("../middleware/authorizerMiddleware");
 const singleUpload = require("../middleware/multerMiddleware");
@@ -24,6 +25,8 @@ const router = express.Router();
 router.route("/register").post(singleUpload, register);
 
 router.route("/login").post(login);
+
+router.route("/verifyEmail").post(verifyEmail);
 
 router.route("/logout").get(logout);
 

@@ -18,6 +18,18 @@ export const userReducer = createReducer(
       state.error = action.payload;
     },
 
+    verifyEmailRequest: state => {
+      state.loading = true;
+    },
+    verifyEmailSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    verifyEmailFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     registerRequest: state => {
       state.loading = true;
     },
@@ -32,10 +44,11 @@ export const userReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
+    setFacultyRevenue: (state, action) => {
+      state.revenue = action.payload;
+    },
     registerSuccess: (state, action) => {
       state.loading = false;
-      state.isAuthenticated = true;
-      state.user = action.payload.user;
       state.message = action.payload.message;
     },
     registerFail: (state, action) => {

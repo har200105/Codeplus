@@ -107,6 +107,6 @@ exports.cancelSubscription = catchAsyncErrors(async (req, res, next) => {
     success: true,
     message: refund
       ? "Subscription cancelled, You will receive full refund within 7 days."
-      : "Subscription cancelled, Now refund initiated as subscription was cancelled after 7 days.",
+      : "Subscription can't be cancelled as 7 days has been passed of taking the subscripiton.",
   });
 });

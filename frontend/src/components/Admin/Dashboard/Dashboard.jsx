@@ -14,11 +14,12 @@ import { DoughnutChart, LineChart } from './Chart';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDashboardStats } from '../../../redux/actions/admin';
 import Loader from '../../Layout/Loader/Loader';
+import { getAllAdminCourses } from '../../../redux/actions/course';
 
 const Databox = ({ title, qty, qtyPercentage, profit }) => (
   <Box
     w={['full', '20%']}
-    boxShadow={'-2px 0 10px rgba(107,70,193,0.5)'}
+    boxShadow={'-2px 0 10px violet'}
     p="8"
     borderRadius={'lg'}
   >
@@ -72,6 +73,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getDashboardStats());
+    dispatch(getAllAdminCourses());
   }, [dispatch]);
 
   return (

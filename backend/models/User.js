@@ -22,6 +22,10 @@ const userSchema = mongoose.Schema({
         minLength:[6,"Password should of minimum length 6"],
         select:false
     },
+    verified: {
+        type: Boolean,
+        default:false
+    },
     role: {
         type: String,
         enum: ["admin", "user","faculty"],
@@ -56,6 +60,9 @@ const userSchema = mongoose.Schema({
         type:String
     },
     resetPasswordExpire: {
+        type:String
+    },
+    emailVerificationToken: {
         type:String
     }
 });
