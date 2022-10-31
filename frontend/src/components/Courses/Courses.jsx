@@ -156,11 +156,6 @@ const Courses = () => {
             backgroundColor: 'teal',
             outline: '1px solid teal',
           },
-          // '&::-webkit-scrollbar': {
-          //   // display: 'none',
-          //   borderRadius: '10px',
-          //   // width: '10px',
-          // },
         }}
       >
         {categories.map((item, index) => (

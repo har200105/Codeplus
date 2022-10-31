@@ -153,7 +153,9 @@ exports.deleteLecture = catchAsyncErrors(async (req, res, next) => {
   const { courseId, lectureId } = req.query;
 
   const course = await Course.findById(courseId);
-  if (!course) return next(new ErrorHandler("Course not found", 404));
+  if (!course) {
+    return next(new ErrorHandler("Course not found", 404));
+  }
 
   const lecture = course.lectures.find((item) => {
     if (item._id.toString() === lectureId.toString()) return item;
