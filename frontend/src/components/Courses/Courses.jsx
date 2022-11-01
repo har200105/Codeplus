@@ -9,6 +9,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import './courses.css';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +17,7 @@ import { getAllCourses } from '../../redux/actions/course';
 import toast from 'react-hot-toast';
 import { addToPlaylist } from '../../redux/actions/profile';
 import { loadUser } from '../../redux/actions/user';
+import Loader from '../Layout/Loader/Loader';
 
 const Course = ({
   views,
@@ -171,6 +173,11 @@ const Courses = () => {
         justifyContent={['flex-start', 'space-evenly']}
         alignItems={['center', 'flex-start']}
       >
+        {loading && (
+          <div className="loader">
+            <Loader />
+          </div>
+        )}
         {courses.length > 0 ? (
           courses.map(item => (
             <Course
@@ -187,7 +194,7 @@ const Courses = () => {
             />
           ))
         ) : (
-          <Heading mt="4" children="Courses Not Found" />
+          <>{!loading && <Heading mt="4" children="Courses Not Found" />}</>
         )}
       </Stack>
     </Container>
