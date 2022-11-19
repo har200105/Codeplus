@@ -107,7 +107,7 @@ const Header = ({ isAuthenticated = false, user }) => {
                         <Link onClick={onClose} to="/admin/users">
                           <Button colorScheme={'purple'} variant="ghost">
                             <RiDashboardFill style={{ margin: '4px' }} />
-                            Users
+                            Faculty Requests
                           </Button>
                         </Link>
                       )}

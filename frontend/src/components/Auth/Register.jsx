@@ -53,7 +53,7 @@ const Register = () => {
     e.preventDefault();
     const myForm = new FormData();
     myForm.append('name', name);
-    myForm.append('email', email);
+    myForm.append('email', email.toLowerCase());
     myForm.append('password', password);
     myForm.append('file', image);
     myForm.append('isFaculty', isFaculty);
@@ -118,7 +118,6 @@ const Register = () => {
             <FormLabel htmlFor="chooseAvatar" children="Choose Avatar" />
             <Input
               accept="image/*"
-              required
               id="chooseAvatar"
               type={'file'}
               css={fileUploadStyle}

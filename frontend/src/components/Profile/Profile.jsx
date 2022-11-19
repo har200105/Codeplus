@@ -92,7 +92,11 @@ const Profile = ({ user }) => {
         padding="8"
       >
         <VStack>
-          <Avatar boxSize={'48'} src={user.avatar.url} />
+          {user?.avatar?.url ? (
+            <Avatar boxSize={'48'} src={user.avatar.url} />
+          ) : (
+            <Avatar boxSize={'48'} src="" />
+          )}
           <Button onClick={onOpen} colorScheme={'yellow'} variant="ghost">
             Change Photo
           </Button>
@@ -102,7 +106,7 @@ const Profile = ({ user }) => {
           <HStack>
             <Text children="Name" fontWeight={'bold'} />
             <Text children={user.name} />
-          </HStack>{' '}
+          </HStack>
           <HStack>
             <Text children="Email" fontWeight={'bold'} />
             <Text children={user.email} />

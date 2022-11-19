@@ -33,9 +33,9 @@ const sendToken = (res, user, message, statusCode = 200) => {
 
 exports.register = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password,isFaculty} = req.body;
-  const file = req.file;
+  let file = req.file;
 
-  if (!name || !email || !password || !file) {
+  if (!name || !email || !password) {
      return next(new ErrorHandler(`Please enter all fields`, 400));
   }
 
@@ -45,8 +45,15 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
      return next(new ErrorHandler(`User Already Exist`, 409));
   }
 
-  const fileUri = getDataUri(file);
-  const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+  let fileUri;
+
+  if (file) {
+     fileUri = getDataUri(file);
+  }
+  let mycloud;
+  if (fileUri) {
+     mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+  }
 
   const emailToken = crypto.randomBytes(20).toString("hex");
   const emailVerificationUrl = `${process.env.FRONTEND_URL}/verify/email/${emailToken}`;
@@ -55,13 +62,13 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
 
   user = await User.create({
     name,
-    email,
+    email:email.toLowerCase(),
     password,
     emailVerificationToken: emailToken, 
     wantedTobeFaculty:isFaculty,
     avatar: {
-      public_id: mycloud.public_id,
-      url: mycloud.secure_url,
+      public_id: mycloud?.public_id,
+      url: mycloud?.secure_url,
     },
   });
 
@@ -73,7 +80,6 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
 
 
 exports.verifyEmail = catchAsyncErrors(async (req, res, next) => {
-  console.log(req.body.token);
   const user = await User.findOne({ emailVerificationToken: req.body.token });
   if (user) {
     user.verified = true;
@@ -178,11 +184,13 @@ exports.updateprofilepicture = catchAsyncErrors(async (req, res, next) => {
   const file = req.file;
 
   const user = await User.findById(req.user._id);
+  console.log(user);
 
   const fileUri = getDataUri(file);
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
-
-  await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+  if (user?.avatar && user?.avatar?.public_id) {
+    await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+  }
 
   user.avatar = {
     public_id: mycloud.public_id,
@@ -332,8 +340,9 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
   if (!user) {
     return next(new ErrorHandler("User not found", 404));
   }
-
-  await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+  if (user?.avatar && user?.avatar?.public_id) {
+    await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+  }
 
   await user.remove();
 
@@ -345,8 +354,9 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
 exports.deleteMyProfile = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.user._id);
-
-  await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+  if (user?.avatar && user?.avatar?.public_id) {
+    await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+  }
 
   await user.remove();
 
