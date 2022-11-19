@@ -32,7 +32,7 @@ const sendToken = (res, user, message, statusCode = 200) => {
 };
 
 exports.register = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password,isFaculty} = req.body;
   const file = req.file;
 
   if (!name || !email || !password || !file) {
@@ -57,7 +57,8 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
     name,
     email,
     password,
-    emailVerificationToken:emailToken,
+    emailVerificationToken: emailToken, 
+    wantedTobeFaculty:isFaculty,
     avatar: {
       public_id: mycloud.public_id,
       url: mycloud.secure_url,
@@ -129,10 +130,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.getMyProfile = catchAsyncErrors(async (req, res, next) => {
-  console.log("USER ID :" + req.user._id);
   const user = await User.findById(req.user._id);
-  console.log(user);
-
   res.status(200).json({
     success: true,
     user,
@@ -237,8 +235,9 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     },
   });
 
-  if (!user)
+  if (!user) {
     return next(new ErrorHandler("Token is invalid or has been expired", 401));
+  }
 
   user.password = req.body.password;
   user.resetPasswordToken = undefined;
@@ -296,9 +295,8 @@ exports.removeFromPlaylist = catchAsyncErrors(async (req, res, next) => {
 });
 
 
-exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
-  const users = await User.find({});
-
+exports.getAllFaculties = catchAsyncErrors(async (req, res, next) => {
+  const users = await User.find({$and:[{wantedTobeFaculty:true},{verified:true}]});
   res.status(200).json({
     success: true,
     users,

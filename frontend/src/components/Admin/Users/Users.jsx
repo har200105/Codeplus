@@ -18,7 +18,7 @@ import { RiDeleteBin7Fill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteUser,
-  getAllUsers,
+  getAllFaculties,
   updateUserRole,
 } from '../../../redux/actions/admin';
 import toast from 'react-hot-toast';
@@ -46,7 +46,7 @@ const Users = () => {
       dispatch({ type: 'clearMessage' });
     }
 
-    dispatch(getAllUsers());
+    dispatch(getAllFaculties());
   }, [dispatch, error, message]);
 
   return (

@@ -75,12 +75,12 @@ export const deleteLecture = (courseId, lectureId) => async dispatch => {
   }
 };
 
-export const getAllUsers = () => async dispatch => {
+export const getAllFaculties = () => async dispatch => {
   try {
     const config = {};
     dispatch({ type: 'getAllUsersRequest' });
 
-    const { data } = await API.get(`/admin/users`, config);
+    const { data } = await API.get(`/admin/faculties`, config);
 
     dispatch({ type: 'getAllUsersSuccess', payload: data.users });
   } catch (error) {

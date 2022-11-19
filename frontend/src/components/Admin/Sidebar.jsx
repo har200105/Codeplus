@@ -38,7 +38,7 @@ const Sidebar = () => {
           fontWeight: 'bold',
         }}
       >
-        Total Revenue - ₹{' '}
+        Total Revenue - ₹
         {parseFloat(
           courses?.reduce((initialSum, a) => initialSum + a.views, 0)
         ) * 0.001}

@@ -17,7 +17,7 @@ import { logout } from '../../../redux/actions/user';
 
 const LinkButton = ({ url = '/', title = 'Home', onClose }) => (
   <Link onClick={onClose} to={url}>
-    <Button variant={'ghost'}>{title}</Button>
+    <Button variant="ghost">{title}</Button>
   </Link>
 );
 
@@ -35,7 +35,7 @@ const Header = ({ isAuthenticated = false, user }) => {
     <>
       <Button
         onClick={onOpen}
-        colorScheme={'yellow'}
+        colorScheme={'blue'}
         width="12"
         height={'12'}
         rounded="full"
@@ -85,7 +85,7 @@ const Header = ({ isAuthenticated = false, user }) => {
                     <VStack>
                       <HStack>
                         <Link onClick={onClose} to="/profile">
-                          <Button variant={'ghost'} colorScheme={'yellow'}>
+                          <Button variant={'ghost'} colorScheme={'blue'}>
                             Profile
                           </Button>
                         </Link>
@@ -103,15 +103,6 @@ const Header = ({ isAuthenticated = false, user }) => {
                           </Button>
                         </Link>
                       )}
-
-                      {user && user.role === 'admin' && (
-                        <Link onClick={onClose} to="/add-faculty">
-                          <Button colorScheme={'purple'} variant="ghost">
-                            <RiDashboardFill style={{ margin: '4px' }} />
-                            Add Faculty
-                          </Button>
-                        </Link>
-                      )}
                       {user && user.role === 'admin' && (
                         <Link onClick={onClose} to="/admin/users">
                           <Button colorScheme={'purple'} variant="ghost">
@@ -125,13 +116,17 @@ const Header = ({ isAuthenticated = false, user }) => {
                 ) : (
                   <>
                     <Link onClick={onClose} to="/login">
-                      <Button colorScheme={'yellow'}>Login</Button>
+                      <Button colorScheme="blue" color="white">
+                        Login
+                      </Button>
                     </Link>
 
                     <p>OR</p>
 
                     <Link onClick={onClose} to="/register">
-                      <Button colorScheme={'yellow'}>Sign Up</Button>
+                      <Button colorScheme="blue" color="white">
+                        Sign Up
+                      </Button>
                     </Link>
                   </>
                 )}

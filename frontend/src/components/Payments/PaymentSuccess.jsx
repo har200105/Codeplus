@@ -20,12 +20,7 @@ const PaymentSuccess = () => {
       </Heading>
 
       <VStack boxShadow={'lg'} pb="16" alignItems={'center'} borderRadius="lg">
-        <Box
-          w="full"
-          bg="yellow.400"
-          p="4"
-          css={{ borderRadius: '8px 8px 0 0' }}
-        >
+        <Box w="full" bg="blue.400" p="4" css={{ borderRadius: '8px 8px 0 0' }}>
           <Text color={'black'}>Payment Success</Text>
         </Box>
 

@@ -90,7 +90,7 @@ export const logout = () => async dispatch => {
   try {
     dispatch({ type: 'logoutRequest' });
 
-    const { data } = await API.get(`/logout`, {});
+    const { data } = await API.get(`/logout`);
     localStorage.removeItem('token');
     dispatch({ type: 'logoutSuccess', payload: data.message });
   } catch (error) {

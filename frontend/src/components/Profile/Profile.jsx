@@ -161,7 +161,7 @@ const Profile = ({ user }) => {
 
               <HStack>
                 <Link to={`/course/${element.course}`}>
-                  <Button variant={'ghost'} colorScheme="yellow">
+                  <Button variant={'ghost'} colorScheme="blue" color="white">
                     Watch Now
                   </Button>
                 </Link>

@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   Button,
+  Checkbox,
   Container,
   FormLabel,
   Heading,
@@ -33,6 +34,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [imagePrev, setImagePrev] = useState('');
   const [image, setImage] = useState('');
+  const [isFaculty, setIsFaculty] = useState(false);
 
   const dispatch = useDispatch();
   const changeImageHandler = e => {
@@ -54,7 +56,7 @@ const Register = () => {
     myForm.append('email', email);
     myForm.append('password', password);
     myForm.append('file', image);
-
+    myForm.append('isFaculty', isFaculty);
     dispatch(register(myForm));
   };
 
@@ -75,7 +77,7 @@ const Register = () => {
               onChange={e => setName(e.target.value)}
               placeholder="abc"
               type={'text'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.500"
             />
           </Box>
 
@@ -88,7 +90,7 @@ const Register = () => {
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@gmail.com"
               type={'email'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.500"
             />
           </Box>
 
@@ -101,7 +103,14 @@ const Register = () => {
               onChange={e => setPassword(e.target.value)}
               placeholder="Enter Your Password"
               type={'password'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.500"
+            />
+          </Box>
+          <Box my="4">
+            <FormLabel htmlFor="isFaculty" children="Is Faculty" />
+            <Checkbox
+              id="isFaculty"
+              onChange={e => setIsFaculty(e.target.checked)}
             />
           </Box>
 
@@ -117,17 +126,16 @@ const Register = () => {
             />
           </Box>
 
-          <Button my="4" colorScheme={'yellow'} type="submit">
+          <Button my="4" colorScheme={'blue'} type="submit" color="white">
             Sign Up
           </Button>
 
           <Box my="4">
-            Already Signed Up?
+            Already Signed Up? &nbsp;
             <Link to="/login">
-              <Button colorScheme={'yellow'} variant="link">
-                Login
+              <Button colorScheme={'blue'} variant="link">
+                Login here
               </Button>
-              here
             </Link>
           </Box>
         </form>

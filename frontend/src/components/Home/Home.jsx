@@ -23,7 +23,7 @@ const Home = () => {
               children="Best Courses at one Go"
             />
             <Link to="/courses">
-              <Button size={'lg'} colorScheme="yellow">
+              <Button size={'lg'} colorScheme="blue">
                 <span className="text">View Courses</span>
               </Button>
             </Link>

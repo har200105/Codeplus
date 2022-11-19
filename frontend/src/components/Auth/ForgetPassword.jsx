@@ -44,14 +44,14 @@ const ForgetPassword = () => {
             onChange={e => setEmail(e.target.value)}
             placeholder="abc@gmail.com"
             type={'email'}
-            focusBorderColor="yellow.500"
+            focusBorderColor="blue.500"
           />
 
           <Button
             isLoading={loading}
             type="submit"
             w={'full'}
-            colorScheme="yellow"
+            colorScheme="blue"
           >
             Send Reset Link
           </Button>

@@ -38,12 +38,14 @@ const userSchema = mongoose.Schema({
     avatar: {
         public_id: {
             type: String,
-            required:true
         },
         url: {
             type: String,
-            required:true
         }
+    },
+    wantedTobeFaculty: {
+        type: Boolean,
+        default:false
     },
     playlist: [{
         course: {
@@ -77,8 +79,6 @@ userSchema.pre("save", async function (next) {
 
 
 userSchema.methods.getJWTToken = function () {
-    console.log("ID");
-    console.log(this._id);
     return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
         expiresIn:"15d"
     })
@@ -91,7 +91,6 @@ userSchema.methods.comparePassword = async function (password) {
 
 userSchema.methods.getResetToken = function () {
   const resetToken = crypto.randomBytes(20).toString("hex");
-
   this.resetPasswordToken = crypto
     .createHash("sha256")
     .update(resetToken)

@@ -30,7 +30,7 @@ const VerifyEmail = () => {
           <Box my="4">
             <Button
               onClick={() => dispatch(verifyEmail(token))}
-              colorScheme="yellow"
+              colorScheme="blue"
               color="white"
             >
               Verify Email

@@ -63,17 +63,16 @@ const Login = () => {
             </Link>
           </Box>
 
-          <Button my="4" colorScheme={'yellow'} type="submit">
+          <Button my="4" colorScheme="blue" type="submit" color="white">
             Login
           </Button>
 
           <Box my="4">
-            New User?
+            New User? &nbsp;
             <Link to="/register">
-              <Button colorScheme={'yellow'} variant="link">
-                Sign Up
+              <Button colorScheme="blue" variant="link">
+                Signup here
               </Button>
-              here
             </Link>
           </Box>
         </form>

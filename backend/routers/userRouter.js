@@ -5,7 +5,7 @@ const {
   deleteMyProfile,
   deleteUser,
   forgetPassword,
-  getAllUsers,
+  getAllFaculties,
   getMyProfile,
   login,
   logout,
@@ -56,7 +56,7 @@ router.route("/addtoplaylist").post(isAuthenticated, addToPlaylist);
 
 router.route("/removefromplaylist").delete(isAuthenticated, removeFromPlaylist);
 
-router.route("/admin/users").get(isAuthenticated, authorizeAdmin, getAllUsers);
+router.route("/admin/faculties").get(isAuthenticated, authorizeAdmin, getAllFaculties);
 
 router
   .route("/admin/user/:id")
