@@ -13,11 +13,11 @@ A online course education website , where Faculties can register and add courses
 # Screen shots of the Project 
 
 ![alt text](./frontend/screenshots/a.PNG)
-![alt text](./frontend/screenshots/b.PNG)
-![alt text](./frontend/screenshots/c.PNG)
-![alt text](./frontend/screenshots/d.PNG)
-![alt text](./frontend/screenshots/e.PNG)
-![alt text](./frontend/screenshots/f.PNG)
+![alt text](./frontend/screenshots/b.png)
+![alt text](./frontend/screenshots/c.png)
+![alt text](./frontend/screenshots/d.png)
+![alt text](./frontend/screenshots/e.png)
+![alt text](./frontend/screenshots/f.png)
 
 
 
