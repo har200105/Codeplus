@@ -8,6 +8,7 @@ import {
   Heading,
   Input,
   VStack,
+  Select,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -35,6 +36,15 @@ const Register = () => {
   const [imagePrev, setImagePrev] = useState('');
   const [image, setImage] = useState('');
   const [isFaculty, setIsFaculty] = useState(false);
+  const [department, setDepartment] = useState('');
+
+  const Departments = [
+    'Computer Science & Engineering',
+    'Mechanical Engineering',
+    'Electrical Engineering',
+    'Chemical Engineering',
+    'Civil Engineering',
+  ];
 
   const dispatch = useDispatch();
   const changeImageHandler = e => {
@@ -57,6 +67,7 @@ const Register = () => {
     myForm.append('password', password);
     myForm.append('file', image);
     myForm.append('isFaculty', isFaculty);
+    myForm.append('department', department);
     dispatch(register(myForm));
   };
 
@@ -64,7 +75,16 @@ const Register = () => {
     <Container h={'95vh'}>
       <VStack h={'full'} justifyContent="center" spacing={'16'}>
         <Heading textTransform={'uppercase'} children={'Registration'} />
-        <form onSubmit={submitHandler} style={{ width: '100%' }}>
+        <form
+          onSubmit={submitHandler}
+          style={{
+            width: '100%',
+            backgroundColor: 'gray',
+            paddingLeft: '20px',
+            paddingRight: '20px',
+            borderRadius: '10px',
+          }}
+        >
           <Box my="4" display={'flex'} justifyContent="center">
             <Avatar src={imagePrev} size={'2xl'} />
           </Box>
@@ -106,6 +126,23 @@ const Register = () => {
               focusBorderColor="blue.500"
             />
           </Box>
+          <Box>
+            <FormLabel htmlFor="department" children="Department" />
+            <Select
+              focusBorderColor="purple.300"
+              value={department}
+              onChange={e => setDepartment(e.target.value)}
+            >
+              <option value="">Choose Your Department</option>
+
+              {Departments.map(item => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </Select>
+          </Box>
+
           <Box my="4">
             <FormLabel htmlFor="isFaculty" children="Is Faculty" />
             <Checkbox

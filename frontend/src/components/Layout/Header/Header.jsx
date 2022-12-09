@@ -42,12 +42,12 @@ const Header = ({ isAuthenticated = false, user }) => {
         zIndex={'overlay'}
         position={'fixed'}
         top="6"
-        left="6"
+        right="6"
       >
         <RiMenu5Fill />
       </Button>
 
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader borderBottomWidth={'1px'}>
@@ -68,11 +68,13 @@ const Header = ({ isAuthenticated = false, user }) => {
                 url="/courses"
                 title="Browse All Courses"
               />
-              <LinkButton
-                onClose={onClose}
-                url="/request"
-                title="Request a Course"
-              />
+              {user && user.role !== 'admin' && user.role !== 'faculty' && (
+                <LinkButton
+                  onClose={onClose}
+                  url="/request"
+                  title="Request a Course"
+                />
+              )}
 
               <HStack
                 justifyContent={'space-evenly'}

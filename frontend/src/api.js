@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const API = axios.create({
-  // baseURL: 'https://codeplusss.herokuapp.com/api',
   // baseURL: 'https://codeplus.onrender.com/api',
   baseURL: 'http://localhost:5000/api',
 });

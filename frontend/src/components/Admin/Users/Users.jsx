@@ -5,7 +5,6 @@ import {
   Heading,
   HStack,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,

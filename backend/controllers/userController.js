@@ -32,7 +32,7 @@ const sendToken = (res, user, message, statusCode = 200) => {
 };
 
 exports.register = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, password,isFaculty} = req.body;
+  const { name, email, password,isFaculty,department} = req.body;
   let file = req.file;
 
   if (!name || !email || !password) {
@@ -65,7 +65,8 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
     email:email.toLowerCase(),
     password,
     emailVerificationToken: emailToken, 
-    wantedTobeFaculty:isFaculty,
+    wantedTobeFaculty: isFaculty,
+    department,
     avatar: {
       public_id: mycloud?.public_id,
       url: mycloud?.secure_url,
