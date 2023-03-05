@@ -79,7 +79,6 @@ const Register = () => {
           onSubmit={submitHandler}
           style={{
             width: '100%',
-            backgroundColor: 'gray',
             paddingLeft: '20px',
             paddingRight: '20px',
             borderRadius: '10px',

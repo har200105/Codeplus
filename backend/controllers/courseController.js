@@ -43,8 +43,6 @@ exports.getAdminCourses = catchAsyncErrors(async (req, res, next) => {
 
 
 exports.createCourse = catchAsyncErrors(async (req, res, next) => {
-  console.log("req");
-  console.log(req.user);
   const { title, description, category } = req.body;
 
   if (!title || !description || !category) {
