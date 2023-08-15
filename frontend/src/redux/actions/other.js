@@ -1,7 +1,7 @@
 import { API } from '../../api';
 
 
-export const courseRequest = (name, email, course) => async dispatch => {
+export const courseRequest = (name, email, course) => async (dispatch) => {
   try {
     const config = {
       headers: {

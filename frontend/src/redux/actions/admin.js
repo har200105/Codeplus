@@ -1,6 +1,6 @@
 import { API } from '../../api';
 
-export const createCourse = formData => async dispatch => {
+export const createCourse = formData => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -20,7 +20,7 @@ export const createCourse = formData => async dispatch => {
   }
 };
 
-export const deleteCourse = id => async dispatch => {
+export const deleteCourse = id => async (dispatch) => {
   try {
     const config = {};
     dispatch({ type: 'deleteCourseRequest' });
@@ -36,7 +36,7 @@ export const deleteCourse = id => async dispatch => {
   }
 };
 
-export const addLecture = (id, formdata) => async dispatch => {
+export const addLecture = (id, formdata) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -56,7 +56,7 @@ export const addLecture = (id, formdata) => async dispatch => {
   }
 };
 
-export const deleteLecture = (courseId, lectureId) => async dispatch => {
+export const deleteLecture = (courseId, lectureId) => async (dispatch) => {
   try {
     const config = {};
     dispatch({ type: 'deleteLectureRequest' });
@@ -75,7 +75,7 @@ export const deleteLecture = (courseId, lectureId) => async dispatch => {
   }
 };
 
-export const getAllFaculties = () => async dispatch => {
+export const getAllFaculties = () => async (dispatch) => {
   try {
     const config = {};
     dispatch({ type: 'getAllUsersRequest' });
@@ -91,7 +91,7 @@ export const getAllFaculties = () => async dispatch => {
   }
 };
 
-export const updateUserRole = id => async dispatch => {
+export const updateUserRole = id => async (dispatch) => {
   try {
     const config = {};
     dispatch({ type: 'updateUserRoleRequest' });
@@ -107,7 +107,7 @@ export const updateUserRole = id => async dispatch => {
   }
 };
 
-export const deleteUser = id => async dispatch => {
+export const deleteUser = id => async (dispatch) => {
   try {
     const config = {};
     dispatch({ type: 'deleteUserRequest' });
@@ -123,7 +123,7 @@ export const deleteUser = id => async dispatch => {
   }
 };
 
-export const getDashboardStats = () => async dispatch => {
+export const getDashboardStats = () => async (dispatch) => {
   try {
     dispatch({ type: 'getAdminStatsRequest' });
 

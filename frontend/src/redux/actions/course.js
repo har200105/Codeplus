@@ -1,8 +1,6 @@
 import { API } from '../../api';
 
-export const getAllCourses =
-  (category = '', keyword = '') =>
-  async dispatch => {
+export const getAllCourses = (category = '', keyword = '') => async (dispatch) => {
     try {
       dispatch({ type: 'allCoursesRequest' });
 
@@ -19,7 +17,7 @@ export const getAllCourses =
     }
   };
 
-export const getAllAdminCourses = () => async dispatch => {
+export const getAllAdminCourses = () => async (dispatch) => {
   try {
     dispatch({ type: 'adminCoursesRequest' });
 
@@ -34,7 +32,7 @@ export const getAllAdminCourses = () => async dispatch => {
   }
 };
 
-export const getCourseLectures = id => async dispatch => {
+export const getCourseLectures = id => async (dispatch) => {
   try {
     dispatch({ type: 'getCourseRequest' });
 

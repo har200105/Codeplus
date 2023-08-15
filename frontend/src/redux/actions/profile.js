@@ -1,6 +1,6 @@
 import { API } from '../../api';
 
-export const updateProfile = (name, email) => async dispatch => {
+export const updateProfile = (name, email) => async (dispatch) => {
   try {
     dispatch({ type: 'updateProfileRequest' });
 
@@ -26,7 +26,7 @@ export const updateProfile = (name, email) => async dispatch => {
   }
 };
 
-export const updateProfilePicture = formdata => async dispatch => {
+export const updateProfilePicture = formdata => async (dispatch) => {
   try {
     dispatch({ type: 'updateProfilePictureRequest' });
 
@@ -45,7 +45,7 @@ export const updateProfilePicture = formdata => async dispatch => {
   }
 };
 
-export const changePassword = (oldPassword, newPassword) => async dispatch => {
+export const changePassword = (oldPassword, newPassword) => async (dispatch) => {
   try {
     dispatch({ type: 'changePasswordRequest' });
 
@@ -71,7 +71,7 @@ export const changePassword = (oldPassword, newPassword) => async dispatch => {
   }
 };
 
-export const forgetPassword = email => async dispatch => {
+export const forgetPassword = email => async (dispatch) => {
   try {
     dispatch({ type: 'forgetPasswordRequest' });
 
@@ -98,7 +98,7 @@ export const forgetPassword = email => async dispatch => {
   }
 };
 
-export const resetPassword = (token, password) => async dispatch => {
+export const resetPassword = (token, password) => async (dispatch) => {
   try {
     dispatch({ type: 'resetPasswordRequest' });
     const config = {
@@ -145,7 +145,7 @@ export const addToPlaylist = id => async (dispatch) => {
   }
 };
 
-export const removeFromPlaylist = id => async dispatch => {
+export const removeFromPlaylist = id => async (dispatch) => {
   try {
     dispatch({ type: 'removeFromPlaylistRequest' });
 

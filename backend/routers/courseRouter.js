@@ -30,7 +30,6 @@ router
   .post(isAuthenticated, authorizeAdmin, singleUpload, addLecture)
   .delete(isAuthenticated, authorizeAdmin, deleteCourse);
 
-// Delete Lecture
 router.route("/lecture").delete(isAuthenticated, authorizeAdmin, deleteLecture);
 
 module.exports=router;

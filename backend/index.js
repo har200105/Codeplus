@@ -8,10 +8,8 @@ const cookieParser = require("cookie-parser");
 const cloudinary = require("cloudinary");
 
 
-// getting config values
 require("dotenv").config();
 
-// middlewares
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
@@ -29,10 +27,8 @@ cloudinary.config({
 
 
 
-// database connection
 require("./db/db")();
 
-// cronjob scheduler
 nodeCron.schedule("0 0 0 1 * *", async () => {
   try {
     await Stats.create({});
